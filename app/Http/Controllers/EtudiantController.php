@@ -14,7 +14,8 @@ class EtudiantController extends Controller
      */
     public function index()
     {
-        //
+        $etudiants = Etudiant::all();
+        return $etudiants;
     }
 
     /**
@@ -46,7 +47,7 @@ class EtudiantController extends Controller
      */
     public function show(Etudiant $etudiant)
     {
-        //
+        return $etudiant;
     }
 
     /**
