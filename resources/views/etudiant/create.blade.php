@@ -23,6 +23,11 @@
                                 <textarea name="body" id="body" placeholder="Entrer le contenu d'article" class="form-control"></textarea>
                             </div>
                         </div>
+                        @forelse ($villes as $ville)
+                        <li><a href="">{{ ucfirst($ville->nom) }}</a></li>
+                        @empty
+                        <li>Aucun article</li>
+                        @endforelse
                         <div class="row">
                             <div class="control-group text-center">
                                 <button class="btn btn-primary">

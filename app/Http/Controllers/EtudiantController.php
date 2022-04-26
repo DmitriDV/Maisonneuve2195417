@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ville;
 use App\Models\Etudiant;
 use Illuminate\Http\Request;
 
@@ -22,11 +23,13 @@ class EtudiantController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \App\Models\Ville  $ville
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('etudiant.create');
+        $villes = Ville::all();
+        return view('etudiant.create', ['villes'=>$villes]);
     }
 
     /**
@@ -51,23 +54,25 @@ class EtudiantController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \App\Models\Ville  $ville
      * @param  \App\Models\Etudiant  $etudiant
      * @return \Illuminate\Http\Response
      */
-    public function show(Etudiant $etudiant)
+    public function show(Etudiant $etudiant, Ville $villes)
     {
-        return view('etudiant.show', ['etudiant'=>$etudiant]);
+        return view('etudiant.show', ['etudiant'=>$etudiant, 'villes'=>$villes]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \App\Models\Ville  $ville
      * @param  \App\Models\Etudiant  $etudiant
      * @return \Illuminate\Http\Response
      */
-    public function edit(Etudiant $etudiant)
+    public function edit(Etudiant $etudiant, Ville $villes)
     {
-        return view('etudiant.edit', ['etudiant'=>$etudiant]);
+        return view('etudiant.edit', ['etudiant'=>$etudiant, 'villes'=>$villes]);
     }
 
     /**
