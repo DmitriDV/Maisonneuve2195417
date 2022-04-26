@@ -15,7 +15,8 @@ class EtudiantController extends Controller
     public function index()
     {
         $etudiants = Etudiant::all();
-        return $etudiants;
+        //return $etudiants;
+        return view('etudiant.index', ['etudiants'=>$etudiants]);
     }
 
     /**
@@ -25,7 +26,7 @@ class EtudiantController extends Controller
      */
     public function create()
     {
-        //
+        return view('etudiant.create');
     }
 
     /**
@@ -36,7 +37,15 @@ class EtudiantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nouvelEtudiant = Etudiant::create([
+            'nom' => $request->nom,
+            'adresse' => $request->adresse,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'date_de_naissance' => $request->date_de_naissance,
+            'villeId' => $request->villeId
+        ]);
+        return redirect('liste/'.$nouvelEtudiant->id);
     }
 
     /**
@@ -47,7 +56,7 @@ class EtudiantController extends Controller
      */
     public function show(Etudiant $etudiant)
     {
-        return $etudiant;
+        return view('etudiant.show', ['etudiant'=>$etudiant]);
     }
 
     /**
@@ -58,7 +67,7 @@ class EtudiantController extends Controller
      */
     public function edit(Etudiant $etudiant)
     {
-        //
+        return view('etudiant.edit', ['etudiant'=>$etudiant]);
     }
 
     /**
@@ -70,7 +79,15 @@ class EtudiantController extends Controller
      */
     public function update(Request $request, Etudiant $etudiant)
     {
-        //
+        $etudiant->update([
+            'nom' => $request->nom,
+            'adresse' => $request->adresse,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'date_de_naissance' => $request->date_de_naissance,
+            'villeId' => $request->villeId
+        ]);
+        return redirect('liste/'.$etudiant->id);
     }
 
     /**
@@ -81,6 +98,7 @@ class EtudiantController extends Controller
      */
     public function destroy(Etudiant $etudiant)
     {
-        //
+        $etudiant->delete();
+        return redirect(route('liste'));
     }
 }
