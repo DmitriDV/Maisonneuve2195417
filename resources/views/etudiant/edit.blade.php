@@ -1,37 +1,58 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-12 pt-2">  
-                <a href="{{ route('blog') }}" class="btn btn-outline-primary btn-sm">Retourner</a>             
-                <div class="border rounded mt-5 pl-4 pr-4 pb-4">
-                    <h1 class="display-4">Modifier l'article</h1>
-                    <p>Modifiez et soumettre ce formulaire pour mettre à jour un article</p>
-                    <hr>
-                    <form method="post">
+    <div class="container mt-4">
+    <div class="about-heading-content">
+            <div class="row">
+                <div class="col-xl-9 col-lg-10 mx-auto">
+                    <div class="bg-faded rounded p-5">
+                        <div class="">
+                            <a href="{{ route('liste') }}" class="btn btn-outline-dark mt-4 mb-4 ">Retourner</a>
+                        </div>
+
+                        <h2 class="display-one">Modifier un profil</h2>
+                        <form method="post">
                         @csrf
                         @method('PUT')
-                        <div class="row">
-                            <div class="control-group col-12">
-                                <label for="title">Titre d'article</label>
-                                <input type="text" id="title" class="form-control" name="title"
-                                placeholder="Entrer le titre d'article" value="{{ $post->title }}" required>
+                            <label class="mt-3" for="nom">Nom :</label>
+                            <div class="cta-inner bg-faded text-center rounded">
+                                <input class="form-control" id="nom" name="nom" type="text" placeholder="Entez votre nom..." value="{{ $etudiant->nom }}"/>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="control-group col-12 mt-2">
-                                <label for="body">Contenu d'article</label>
-                                <textarea name="body" id="body" placeholder="Entrer le contenu d'article" class="form-control">{{ $post->body }}</textarea>
+                            <label class="mt-3" for="adresse">Adresse :</label>
+                            <div class="cta-inner bg-faded text-center rounded">
+                                <textarea class="form-control" name="adresse" id="adresse" type="adresse" placeholder="Entez votre adresse...">{{ $etudiant->adresse }}</textarea>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="control-group text-center">
-                                <button class="btn btn-primary">
-                                    Saisir un article
-                                </button>
+                            <label class="mt-3" for="phone">Téléphone :</label>
+                            <div class="cta-inner bg-faded text-center rounded">
+                                <input class="form-control" name="phone" id="phone" type="tel" placeholder="Entez votre numéro de téléphone..."  value="{{ $etudiant->phone }}"/>
                             </div>
-                        </div>
-                    </form>
+                            <label class="mt-3" for="email">Courriel :</label>
+                            <div class="cta-inner bg-faded text-center rounded">
+                                <input class="form-control" name="email" id="email" type="email" placeholder="Entez votre courriel..." value="{{ $etudiant->email }}"/>
+                            </div>
+                            <label class="mt-3" for="date_de_naissance">Date de naissance :</label>
+                            <div class="cta-inner bg-faded text-center rounded">
+                                <input class="form-control" name="date_de_naissance" id="date_de_naissance" placeholder="Entrez votre date de naissance..." value="{{ $etudiant->date_de_naissance }}"></input>
+                            </div>
+                            <label class="mt-3" for="villeId">Ville :</label>
+                            <div class="cta-inner bg-faded text-center rounded">
+                                <select class="form-control" name="villeId" id="villeId" placeholder="Entrez votre date de naissance...">
+                                     
+                                    <option value="{{ $etudiant->villeId }}"@selected>{{ $etudiant->EtudiantHasVille->nom }}</option>
+                                    @forelse ($villes as $ville)
+                                    <option value= "{{ $ville->id }}" @selected>
+                                        {{ $ville->nom }}
+                                    </option>
+                                    @empty
+                                    <li>Aucun ville</li>
+                                    @endforelse
+                                </select>
+                            </div>
+                          
+                            <!-- Submit Button-->
+                            <button class="btn btn-outline-dark mt-4 mb-5" id="submitButton" type="submit">Envoyer</button>
+                           
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

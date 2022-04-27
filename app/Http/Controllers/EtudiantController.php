@@ -66,12 +66,12 @@ class EtudiantController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ville  $ville
      * @param  \App\Models\Etudiant  $etudiant
      * @return \Illuminate\Http\Response
      */
     public function edit(Etudiant $etudiant, Ville $villes)
     {
+        $villes = Ville::all();
         return view('etudiant.edit', ['etudiant'=>$etudiant, 'villes'=>$villes]);
     }
 
@@ -105,5 +105,16 @@ class EtudiantController extends Controller
     {
         $etudiant->delete();
         return redirect(route('liste'));
+    }
+
+    public function queries(){
+      
+        //return 'salut';
+        $etudiant = Etudiant::select('villes.nom')
+        ->join('villes', 'etudiants.villeId', '=', 'villes.id')
+        ->get(); //reponse
+        return $etudiant;
+        //$blog = BlogPost::find(1);
+        //return view('blog.blog-query', ['blog' => $blog]);
     }
 }
