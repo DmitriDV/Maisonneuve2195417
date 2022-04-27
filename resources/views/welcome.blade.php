@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
-    <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="assets/img/intro.jpg" alt="..." />
+    <div class="row">
+        <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="assets/img/intro.jpg" alt="..." />
+    </div>
     <div class="row">
         <div class="text-center pt-5 pb-5">
             <h1 class="display-one mt-5">{{ config('app.name') }}</h1>
