@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @section('content')
     <div class="container mt-4">
-    <div class="about-heading-content">
+        <div class="about-heading-content">
             <div class="row">
                 <div class="col-xl-9 col-lg-10 mx-auto">
                     <div class="bg-faded rounded p-5">
+                        <!-- Retour-->
                         <div class="">
                             <a href="{{ route('liste') }}" class="btn btn-outline-dark mt-4 mb-4 ">Retourner</a>
                         </div>
-
                         <h2 class="display-one">Modifier un profil</h2>
                         <form method="post">
                         @csrf
@@ -36,7 +36,6 @@
                             <label class="mt-3" for="villeId">Ville :</label>
                             <div class="cta-inner bg-faded text-center rounded">
                                 <select class="form-control" name="villeId" id="villeId" placeholder="Entrez votre date de naissance...">
-                                     
                                     <option value="{{ $etudiant->villeId }}"@selected>{{ $etudiant->EtudiantHasVille->nom }}</option>
                                     @forelse ($villes as $ville)
                                     <option value= "{{ $ville->id }}" @selected>
@@ -47,10 +46,8 @@
                                     @endforelse
                                 </select>
                             </div>
-                          
                             <!-- Submit Button-->
                             <button class="btn btn-outline-dark mt-4 mb-5" id="submitButton" type="submit">Envoyer</button>
-                           
                         </form>
                     </div>
                 </div>

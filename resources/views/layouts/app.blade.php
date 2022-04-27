@@ -59,7 +59,7 @@
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Dmitriy Dudchenko 2022</p></div>
         </footer>
-
+        <!-- Script -->
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     </body>
 </html>

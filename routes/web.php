@@ -30,4 +30,3 @@ Route::get('/liste/{etudiant}', [EtudiantController::class, 'show'])->name('list
 Route::get('/liste/{etudiant}/edit', [EtudiantController::class, 'edit'])->name('liste.edit');
 Route::put('/liste/{etudiant}/edit', [EtudiantController::class, 'update']);
 Route::delete('/liste/{etudiant}', [EtudiantController::class, 'destroy']);
-Route::get('/queries', [EtudiantController::class, 'queries']);
