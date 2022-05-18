@@ -19,7 +19,7 @@ class Etudiant extends Model
         'villeId'
     ];
 
-    public function EtudiantHasVille() {
+    public function etudiantHasVille() {
         return $this->hasOne('App\Models\Ville', 'id', 'villeId');
     }
 

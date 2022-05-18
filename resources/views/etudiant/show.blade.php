@@ -16,7 +16,7 @@
                 <p>Phone : {{ $etudiant->phone }}</p>
                 <p>Email : {{ $etudiant->email }}</p>
                 <p>Date de naissance : {{ $etudiant->date_de_naissance }}</p>
-                <p>Ville : {{ $etudiant->EtudiantHasVille->nom }}</p>
+                <p>Ville : {{ $etudiant->etudiantHasVille->nom }}</p>
                 <a href="{{ route('liste.edit', $etudiant->id) }}" class="btn btn-outline-dark mt-auto">Modifier le profil</a>
                 <hr>
                 <form method="post">

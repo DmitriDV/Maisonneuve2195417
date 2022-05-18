@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomAuthController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\EtudiantController;
 use \App\Http\Controllers\VilleController;
@@ -30,3 +31,10 @@ Route::get('/liste/{etudiant}', [EtudiantController::class, 'show'])->name('list
 Route::get('/liste/{etudiant}/edit', [EtudiantController::class, 'edit'])->name('liste.edit');
 Route::put('/liste/{etudiant}/edit', [EtudiantController::class, 'update']);
 Route::delete('/liste/{etudiant}', [EtudiantController::class, 'destroy']);
+
+Route::get('login', [CustomAuthController::class, 'index'])->name('login');
+Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('custom.login');
+Route::get('registration', [CustomAuthController::class, 'create'])->name('registration');
+Route::post('custom-registration', [CustomAuthController::class, 'store'])->name('custom.registration');
+
+Route::get('dashboard', [CustomAuthController::class, 'dashboard']);

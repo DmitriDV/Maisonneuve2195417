@@ -36,7 +36,7 @@
                             <label class="mt-3" for="villeId">Ville :</label>
                             <div class="cta-inner bg-faded text-center rounded">
                                 <select class="form-control" name="villeId" id="villeId" placeholder="Entrez votre date de naissance...">
-                                    <option value="{{ $etudiant->villeId }}"@selected>{{ $etudiant->EtudiantHasVille->nom }}</option>
+                                    <option value="{{ $etudiant->villeId }}"@selected>{{ $etudiant->etudiantHasVille->nom }}</option>
                                     @forelse ($villes as $ville)
                                     <option value= "{{ $ville->id }}" @selected>
                                         {{ $ville->nom }}
