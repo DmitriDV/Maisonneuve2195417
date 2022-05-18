@@ -35,12 +35,14 @@
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <a href="/" class="btn btn-outline-dark" type="submit">
+                        <a href="/login" class="btn btn-outline-dark" type="submit">
                              Connexion
                             <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
                             <i class="bi bi-box-arrow-in-right"></i>
                         </a>
+                        
                     </form>
+                    @yield('content_nav')
                 </div>
             </div>
         </nav>

@@ -4,6 +4,7 @@ use App\Http\Controllers\CustomAuthController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\EtudiantController;
 use \App\Http\Controllers\VilleController;
+use \App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,5 +37,15 @@ Route::get('login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('custom.login');
 Route::get('registration', [CustomAuthController::class, 'create'])->name('registration');
 Route::post('custom-registration', [CustomAuthController::class, 'store'])->name('custom.registration');
-
+Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout');
 Route::get('dashboard', [CustomAuthController::class, 'dashboard']);
+
+Route::get('/forum', [ArticleController::class, 'index'])->name('forum')->middleware('auth');
+Route::get('/forum/{article}', [ArticleController::class, 'show'])->name('forum.show')->middleware('auth');
+Route::get('/forum/create/article', [ArticleController::class, 'create'])->name('forum.create')->middleware('auth');
+Route::post('/forum/create/article', [ArticleController::class, 'store'])->name('forum.store')->middleware('auth');
+Route::get('forum/{article}/edit', [ArticleController::class, 'edit'])->name('forum.edit')->middleware('auth');
+Route::put('forum/{article}/edit', [ArticleController::class, 'update'])->middleware('auth');
+Route::delete('forum/{article}', [ArticleController::class, 'destroy'])->middleware('auth');
+Route::get('forum-queries', [ArticleController::class, 'queries'])->middleware('auth');
+Route::get('forum/{article}/PDF', [ArticleController::class, 'showPdf'])->name('forum.pdf')->middleware('auth');

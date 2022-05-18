@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Hash; 
 use Auth;
+use Session; 
 
 class CustomAuthController extends Controller
 {
@@ -119,11 +120,16 @@ class CustomAuthController extends Controller
     }
 
     public function dashboard(){
-        $name = "Guest";
+        $name = "Connexion";
         if(Auth::check()){
             $name = Auth::user()->name;
         }
         return view('etudiant.dashboard', ['name' => $name]);
     }
     
+    public function logout(){
+        Session::flush();
+        Auth::logout();
+        return redirect(route('login'));
+    }
 }
