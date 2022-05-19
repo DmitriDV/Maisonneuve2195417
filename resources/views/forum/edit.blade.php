@@ -13,14 +13,14 @@
                         @method('PUT')
                         <div class="row">
                             <div class="control-group col-12">
-                                <label for="title">Titre du message</label>
-                                <input type="text" id="title" class="form-control" name="title"
-                                       placeholder="Entrer le titre du message" value="{{ $post->title }}" required>
+                                <label for="titre">Titre du message</label>
+                                <input type="text" id="titre" class="form-control" name="titre"
+                                       placeholder="Entrer le titre du message" value="{{ $article->titre }}" required>
                             </div>
                             <div class="control-group col-12 mt-2">
-                                <label for="body">Corps du message</label>
-                                <textarea id="body" class="form-control" name="body" placeholder="Entrer le corps du message"
-                                          rows="" required>{{ $post->body }}</textarea>
+                                <label for="contenu">Corps du message</label>
+                                <textarea id="contenu" class="form-control" name="contenu" placeholder="Entrer le corps du message"
+                                          rows="" required>{{ $article->contenu }}</textarea>
                             </div>
                         </div>
                         <div class="row mt-2">

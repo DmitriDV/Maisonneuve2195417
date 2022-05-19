@@ -16,7 +16,7 @@ class Article extends Model
         'etudiant_id'
     ];
 
-    public function articleHasUser() {
+    public function articleHasEtudiant() {
         return $this->hasOne('App\Models\Etudiant', 'id', 'etudiant_id');
     }
 }

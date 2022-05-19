@@ -46,7 +46,7 @@ class EtudiantController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'date_de_naissance' => $request->date_de_naissance,
-            'villeId' => $request->villeId
+            'ville_id' => $request->ville_id
         ]);
         return redirect('liste/'.$nouvelEtudiant->id);
     }
@@ -91,7 +91,7 @@ class EtudiantController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'date_de_naissance' => $request->date_de_naissance,
-            'villeId' => $request->villeId
+            'ville_id' => $request->ville_id
         ]);
         return redirect('liste/'.$etudiant->id);
     }

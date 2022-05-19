@@ -4,17 +4,17 @@
     <div class="container">
         <div class="row">
             <div class="col-12 pt-2">  
-                <a href="{{ route('blog') }}" class="btn btn-outline-primary btn-sm">Retourner</a>             
-                <h1 class="display-one">{{ ucfirst($post->title) }}</h1>
-                {!! $post->body !!}
+                <a href="{{ route('forum') }}" class="btn btn-outline-primary btn-sm">Retourner</a>             
+                <h1 class="display-one">{{ ucfirst($article->titre) }}</h1>
+                {!! $article->contenu !!}
                 <hr>
-                <strong>Categorie : </strong> {{$post->blogHasCategorie->categorie_en}}
+                
                 <hr>
-                <strong>Author :</strong> {{$post->blogHasUser->name}}
+                <strong>Author :</strong> {{$article->articleHasEtudiant->nom}}
                 <hr>
-                <a href="{{ route('blog.edit', $post->id)}}" class="btn btn-outline-primary">Modifier l'article</a>
+                <a href="{{ route('forum.edit', $article->id)}}" class="btn btn-outline-primary">Modifier l'article</a>
                 <hr>
-                <a href="{{ route('blog.pdf', $post->id)}}" class="btn btn-outline-success" target="_blank">PDF</a>
+                <a href="{{ route('forum.pdf', $article->id)}}" class="btn btn-outline-success" target="_blank">PDF</a>
                 <hr>
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Supprimer l'article

@@ -54,11 +54,10 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show($article)
+    public function show(Article $article, Etudiant $etudiants)
     {
         //$article = Article::selectForumArticle($article);
-        $article = 'article!!!';
-        return  view ('forum.show', ['article'=>$article]);
+        return  view ('forum.show', ['article'=>$article, 'etudiants'=>$etudiants]);
     }
 
     /**

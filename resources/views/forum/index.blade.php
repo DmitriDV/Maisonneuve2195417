@@ -15,7 +15,7 @@
                 </div>
                 <ul>
                     @forelse($articles as $article)
-                        <li><a href="{{ route('forum.show', $article->id) }}">{{ ucfirst($article->title_en)}}</a></li>
+                        <li><a href="{{ route('forum.show', $article->id) }}">{{ ucfirst($article->titre)}}</a></li>
                     @empty
                         <li>Aucun article</li>
                     @endforelse

@@ -31,7 +31,7 @@ class EtudiantFactory extends Factory
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->email(),
             'date_de_naissance' => $this->faker->date($format = 'Y-m-d', $max = '2000-01-01'),
-            'villeId' => $this->faker->randomElement($villes)
+            'ville_id' => $this->faker->randomElement($villes)
         ];
     }
 }

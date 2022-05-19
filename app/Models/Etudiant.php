@@ -16,11 +16,11 @@ class Etudiant extends Model
         'body',
         'email', 
         'date_de_naissance',
-        'villeId'
+        'ville_id'
     ];
 
     public function etudiantHasVille() {
-        return $this->hasOne('App\Models\Ville', 'id', 'villeId');
+        return $this->hasOne('App\Models\Ville', 'id', 'ville_id');
     }
 
 }

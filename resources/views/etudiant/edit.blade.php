@@ -33,10 +33,10 @@
                             <div class="cta-inner bg-faded text-center rounded">
                                 <input class="form-control" name="date_de_naissance" id="date_de_naissance" placeholder="Entrez votre date de naissance..." value="{{ $etudiant->date_de_naissance }}"></input>
                             </div>
-                            <label class="mt-3" for="villeId">Ville :</label>
+                            <label class="mt-3" for="ville_id">Ville :</label>
                             <div class="cta-inner bg-faded text-center rounded">
-                                <select class="form-control" name="villeId" id="villeId" placeholder="Entrez votre date de naissance...">
-                                    <option value="{{ $etudiant->villeId }}"@selected>{{ $etudiant->etudiantHasVille->nom }}</option>
+                                <select class="form-control" name="ville_id" id="ville_id" placeholder="Entrez votre date de naissance...">
+                                    <option value="{{ $etudiant->ville_id }}"@selected>{{ $etudiant->etudiantHasVille->nom }}</option>
                                     @forelse ($villes as $ville)
                                     <option value= "{{ $ville->id }}" @selected>
                                         {{ $ville->nom }}
