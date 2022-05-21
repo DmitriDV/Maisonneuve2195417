@@ -34,15 +34,38 @@
                             </ul>
                         </li>
                     </ul>
-                    <form class="d-flex">
-                        <a href="/login" class="btn btn-outline-dark" type="submit">
-                             Connexion
-                            <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
-                            <i class="bi bi-box-arrow-in-right"></i>
-                        </a>
-                        
+                    @php $locale = session()->get('locale'); @endphp
+                    @guest
+                    <form class="d-flex mx-2">
+                    <a href="{{ route('login') }}" class="btn btn-outline-dark" type="submit">
+                        Login
+                        <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
+                        <i class="bi bi-arrow-right-circle"></i>
+                    </a>
                     </form>
-                    @yield('content_nav')
+                    <form class="d-flex mx-2">
+                    <a href="{{ route('registration') }}" class="btn btn-outline-dark" type="submit">
+                        Registration
+                        <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
+                        <i class="bi bi-person-circle"></i>
+                    </a>
+                    </form>
+                    @else
+                    <form class="d-flex mx-2">
+                    <a href="{{ route('forum') }}" class="btn btn-outline-dark" type="submit">
+                        Articles
+                        <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    </form>
+                    <form class="d-flex mx-2">
+                    <a href="{{ route('logout') }}" class="btn btn-outline-dark" type="submit">
+                        Logout
+                        <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
+                        <i class="bi bi-arrow-left-circle"></i>
+                    </a>
+                    </form>
+                    @endguest
                 </div>
             </div>
         </nav>

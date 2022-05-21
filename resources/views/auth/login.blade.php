@@ -12,6 +12,12 @@
 
                             <form action="{{ route('custom.login')}}" method="post">
                                 @csrf
+                                @if(session('success'))
+                                <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                                    {{ session('success')}}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                @endif
                                 <div class="form-outline mb-4">
                                     <input type="email" class="form-control" placeholder="Votre courriel" name="email" value="{{old('email')}}"/>
                                     @if($errors->has('email'))

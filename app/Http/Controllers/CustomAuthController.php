@@ -50,7 +50,7 @@ class CustomAuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->save(); 
         
-        return redirect(route('login'));
+        return redirect(route('login'))->withSuccess('Felicitation !');
     }
 
     /**
@@ -120,11 +120,11 @@ class CustomAuthController extends Controller
     }
 
     public function dashboard(){
-        $name = "Connexion";
+        $name = "MyConnexion";
         if(Auth::check()){
             $name = Auth::user()->name;
         }
-        return view('etudiant.dashboard', ['name' => $name]);
+        return view('layouts.dashboard', ['name' => $name]);
     }
     
     public function logout(){

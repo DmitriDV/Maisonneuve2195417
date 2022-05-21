@@ -1,13 +1,15 @@
 
 @extends('layouts.app')
 
-@section('content_nav')
+@section('dashboard')
     <form class="d-flex nav-item dropdown">
         <a href="/login" class="btn btn-outline-dark" type="submit" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         {{ $name }}
+        
             <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
             <i class="bi bi-box-arrow-in-right"></i>
         </a>
+        @php $locale = session()->get('locale'); @endphp
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             @guest
             <li><a class="dropdown-item" href="./liste">Login</a></li>

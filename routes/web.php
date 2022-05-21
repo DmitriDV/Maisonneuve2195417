@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\EtudiantController;
 use \App\Http\Controllers\VilleController;
 use \App\Http\Controllers\ArticleController;
+use \App\Http\Controllers\LocalizationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use \App\Http\Controllers\ArticleController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome')->name('welcome');
 });
 
 Route::get('/about', function () {
@@ -37,7 +38,7 @@ Route::get('login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('custom.login');
 Route::get('registration', [CustomAuthController::class, 'create'])->name('registration');
 Route::post('custom-registration', [CustomAuthController::class, 'store'])->name('custom.registration');
-Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout');
+Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout')->middleware('auth');
 Route::get('dashboard', [CustomAuthController::class, 'dashboard']);
 
 Route::get('/forum', [ArticleController::class, 'index'])->name('forum')->middleware('auth');
@@ -49,3 +50,5 @@ Route::put('forum/{article}/edit', [ArticleController::class, 'update'])->middle
 Route::delete('forum/{article}', [ArticleController::class, 'destroy'])->middleware('auth');
 Route::get('forum-queries', [ArticleController::class, 'queries'])->middleware('auth');
 Route::get('forum/{article}/PDF', [ArticleController::class, 'showPdf'])->name('forum.pdf')->middleware('auth');
+
+Route::get('/lang/{locale}', [LocalizationController::class, 'index'])->name('lang');
