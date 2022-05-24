@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Etudiant;
+use App\Models\Categorie;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use PDF;
@@ -18,8 +20,16 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
         $articles = Article::all();
-        return view('forum.index', ['articles'=>$articles]);
+        $user_name ='';
+        $user_id ='';
+
+        if(Auth::check()){
+        $user_name = Auth::user()->name;
+        $user_id = Auth::user()->id;
+        }        
+        return view('forum.index', ['articles'=>$articles, 'user'=>$user, 'user_id'=>$user_id, 'user_name'=>$user_name]);
     }
 
     /**
@@ -29,8 +39,18 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        $user = Auth::user();
+
+        $user_name ='';
+        $user_id ='';
+
+        if(Auth::check()){
+            $user_name = Auth::user()->name;
+            $user_id = Auth::user()->id;
+        }
+        $categories = Categorie::selectCategorie();
         $etudiants = Etudiant::all();
-        return view('forum.create', ['etudiants'=>$etudiants]);
+        return view('forum.create', ['etudiants'=>$etudiants, 'user'=>$user, 'user_id'=>$user_id, 'user_name'=>$user_name, 'categories'=>$categories]);
     }
 
     /**
@@ -41,11 +61,20 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'titre_en' => 'required|min:3',
+            'titre_fr' => 'required|min:3',
+            'contenu_en' => 'required|min:6',
+            'contenu_fr' => 'required|min:6',
+            'categorie_id' => 'exists:App\Models\Categorie,id'
+        ]);
+
         $newArticle = new Article;
         $newArticle->fill($request->all());
         $newArticle->user_id = Auth::user()->id;
         $newArticle->save();
-        return redirect('forum/'.$newArticle->id);
+        return redirect('forum');
+        //return redirect('forum/'.$newArticle->id);
     }
 
     /**
@@ -54,10 +83,29 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
+    //public function show(Article $article, Etudiant $etudiants)
+    //{
+    //    $selectedArticle = Article::selectArticle($article->id);
+    //            $user_email = Auth::user()->email;
+    //    return  view ('forum.show', ['selectedArticle'=>$selectedArticle, 'article'=>$article,'etudiants'=>$etudiants, 'user_email'=>$user_email]);
+    //}
+
     public function show(Article $article, Etudiant $etudiants)
     {
+
         //$article = Article::selectForumArticle($article);
-        return  view ('forum.show', ['article'=>$article, 'etudiants'=>$etudiants]);
+        $user = Auth::user();
+
+        $user_name ='';
+        $user_id ='';
+        $user_email ='';
+
+        if(Auth::check()){
+            $user_name = Auth::user()->name;
+            $user_email = Auth::user()->email;
+            $user_id = Auth::user()->id;
+        }
+        return  view ('forum.show', ['article'=>$article, 'user'=>$user, 'user_id'=>$user_id, 'user_name'=>$user_name, 'user_email'=>$user_email]);
     }
 
     /**
@@ -68,7 +116,17 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('forum.edit', ['article' => $article]);
+        $user = Auth::user();
+
+        $user_name ='';
+        $user_id ='';
+        
+        if(Auth::check()){
+            $user_name = Auth::user()->name;
+            $user_id = Auth::user()->id;
+        }
+        $categories = Categorie::selectCategorie();
+        return view('forum.edit', ['article' => $article, 'user'=>$user, 'user_id'=>$user_id, 'user_name'=>$user_name, 'categories'=>$categories]);
     }
 
     /**
@@ -80,9 +138,20 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+        $request->validate([
+            'titre_en' => 'required|min:3',
+            'titre_fr' => 'required|min:3',
+            'contenu_en' => 'required|min:6',
+            'contenu_fr' => 'required|min:6',
+            'categorie_id' => 'exists:App\Models\Categorie,id'
+        ]);
+        
         $article->update([
-            'titre' => $request->titre,
-            'contenu' => $request->contenu
+            'titre_en' => $request->titre_en,
+            'titre_fr' => $request->titre_fr,
+            'contenu_en' => $request->contenu_en,
+            'contenu_fr' => $request->contenu_fr,
+            'categorie_id' => $request->categorie_id,
         ]);
         return redirect(route('forum.show', $article->id));
     }

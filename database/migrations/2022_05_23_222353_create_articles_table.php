@@ -15,9 +15,12 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->text('titre');
-            $table->text('contenu');
-            $table->foreignId('etudiant_id')->constrained('etudiants');
+            $table->text('titre_fr');
+            $table->text('titre_en');
+            $table->text('contenu_fr');
+            $table->text('contenu_en');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('categorie_id')->constrained('categories');
             $table->timestamps();
         });
     }

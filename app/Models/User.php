@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use DB;
 
 class User extends Authenticatable
 {
@@ -21,7 +23,20 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'etudiant_id'
     ];
+
+    
+    static public function selectUser($id){
+        $query = User::Select()
+        ->WHERE('user_id', '=',  $id)
+        ->get();
+        return $query;
+    }
+
+    public function userHasEtudiant() {
+        return $this->hasOne('App\Models\Etudiant', 'id', 'etudiant_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

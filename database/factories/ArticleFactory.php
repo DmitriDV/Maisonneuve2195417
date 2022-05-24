@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Etudiant;
+use App\Models\Categorie;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker;
 
 class ArticleFactory extends Factory
 {
@@ -14,11 +16,15 @@ class ArticleFactory extends Factory
      */
     public function definition()
     {
-        $etudiants = Etudiant::all()->pluck('id')->toArray();
+        $users = User::all()->pluck('id')->toArray();
+        $categories = Categorie::all()->pluck('id')->toArray();
         return [
-            'titre' => $this->faker->realText($maxNbChars = 40, $indexSize = 2),
-            'contenu' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),
-            'etudiant_id' => $this->faker->randomElement($etudiants)
+            'titre_fr' => $this->faker->realText($maxNbChars = 40, $indexSize = 2),
+            'contenu_fr' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),
+            'titre_en' => $this->faker->realText($maxNbChars = 40, $indexSize = 2),
+            'contenu_en' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),
+            'user_id' => $this->faker->randomElement($users),
+            'categorie_id' => $this->faker->randomElement($categories)
         ];
     }
 }

@@ -26,10 +26,8 @@ class EtudiantFactory extends Factory
     {
         $villes = Ville::all()->pluck('id')->toArray();
         return [
-            'nom' => $this->faker->name(),
             'adresse' => $this->faker->address(),
             'phone' => $this->faker->phoneNumber(),
-            'email' => $this->faker->email(),
             'date_de_naissance' => $this->faker->date($format = 'Y-m-d', $max = '2000-01-01'),
             'ville_id' => $this->faker->randomElement($villes)
         ];

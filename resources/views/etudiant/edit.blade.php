@@ -1,57 +1,108 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container mt-4">
-        <div class="about-heading-content">
-            <div class="row">
-                <div class="col-xl-9 col-lg-10 mx-auto">
-                    <div class="bg-faded rounded p-5">
-                        <!-- Retour-->
-                        <div class="">
-                            <a href="{{ route('liste') }}" class="btn btn-outline-dark mt-4 mb-4 ">Retourner</a>
+<section class="vh-120 bg-image"
+    style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">@lang('lang.title_student_modification')</h2>
+                            <form action="" method="post">
+                                @csrf
+                                @method('PUT')
+                                <div class="form-outline mb-1">
+                                    <label class="mt-3" for="name">@lang('lang.title_registration_name') :</label>
+                                    <input type="text" class="form-control" placeholder="@lang('lang.placeholder_registration_name')" name="name" value="{{$user->name}}" />
+
+                                    @if($errors->has('name'))
+                                    <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
+                                        {{ $errors->first('name') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    @endif
+                                </div>
+
+                                <div class="form-outline mb-1">
+                                    <label class="mt-3" for="">@lang('lang.title_registration_address') :</label>
+                                    <input type="text" class="form-control" placeholder="@lang('lang.placeholder_registration_address')" name="adresse" value="{{$user->userHasEtudiant->adresse}}" />
+
+                                    @if($errors->has('address'))
+                                    <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
+                                        {{ $errors->first('address') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    @endif
+                                </div>
+
+                                <div class="form-outline mb-1">
+                                    <label class="mt-3" for="ville_id">@lang('lang.title_registration_city') :</label>
+                                    <div class="cta-inner bg-faded text-center rounded">
+                                        <select class="form-control" name="ville_id" id="ville_id" placeholder="" >
+                                            <option value="">{{$user->userHasEtudiant->etudiantHasVille->nom}}</option>
+                                            @forelse ($villes as $ville)
+                                            <option value= "{{ $ville->id }}" @selected>
+                                                {{ $ville->nom }}
+                                            </option>
+                                            @empty
+                                            <li>Aucun ville</li>
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-outline mb-1">
+                                <label class="mt-3" for="phone">@lang('lang.title_registration_telephone') :</label>
+                                    <input type="text" class="form-control" placeholder="@lang('lang.placeholder_registration_telephone')" name="phone" value="{{$user->userHasEtudiant->phone}}" />
+
+                                    @if($errors->has('phone'))
+                                    <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
+                                        {{ $errors->first('phone') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    @endif
+                                </div>
+
+                                <div class="form-outline mb-1">
+                                <label class="mt-3" for="date_de_naissance">@lang('lang.title_registration_birthday') :</label>
+                                    <input type="text" class="form-control" placeholder="@lang('lang.placeholder_registration_birthday')" name="date_de_naissance" value="{{$user->userHasEtudiant->date_de_naissance}}" />
+
+                                    @if($errors->has('date_de_naissance'))
+                                    <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
+                                        {{ $errors->first('date_de_naissance') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    @endif
+                                </div>
+
+                                <div class="form-outline mb-1">
+                                    <label class="mt-3" for="email">@lang('lang.text_password') :</label>
+                                    <input type="password" class="form-control" placeholder="@lang('lang.text_password')" name="password" />
+                                </div>  
+                                <div class="form-outline mb-5">    
+                                    <label class="mt-3" for="email">@lang('lang.text_password_repeat') :</label>
+                                    <input type="password" class="form-control" placeholder="@lang('lang.text_password_repeat')" name="password_confirmation" />
+                                    @if($errors->has('password'))
+                                    <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
+                                        {{ $errors->first('password') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    @endif
+                                </div>
+                                <div class="d-flex justify-content-center btn-group-vertical">
+                                    <button class="btn btn-outline-dark" id="submitButton" type="submit">@lang('lang.button_student_modify')</button>
+                                </div>
+                                <div class="d-flex justify-content-center btn-group-vertical mt-4">
+                                    <a href="{{ route('liste.show', $user->id) }}" class="btn btn-outline-dark">@lang('lang.button_cancel')</a>
+                                </div>
+                            </form>
+
                         </div>
-                        <h2 class="display-one">Modifier un profil</h2>
-                        <form method="post">
-                        @csrf
-                        @method('PUT')
-                            <label class="mt-3" for="nom">Nom :</label>
-                            <div class="cta-inner bg-faded text-center rounded">
-                                <input class="form-control" id="nom" name="nom" type="text" placeholder="Entez votre nom..." value="{{ $etudiant->nom }}"/>
-                            </div>
-                            <label class="mt-3" for="adresse">Adresse :</label>
-                            <div class="cta-inner bg-faded text-center rounded">
-                                <textarea class="form-control" name="adresse" id="adresse" type="adresse" placeholder="Entez votre adresse...">{{ $etudiant->adresse }}</textarea>
-                            </div>
-                            <label class="mt-3" for="phone">Téléphone :</label>
-                            <div class="cta-inner bg-faded text-center rounded">
-                                <input class="form-control" name="phone" id="phone" type="tel" placeholder="Entez votre numéro de téléphone..."  value="{{ $etudiant->phone }}"/>
-                            </div>
-                            <label class="mt-3" for="email">Courriel :</label>
-                            <div class="cta-inner bg-faded text-center rounded">
-                                <input class="form-control" name="email" id="email" type="email" placeholder="Entez votre courriel..." value="{{ $etudiant->email }}"/>
-                            </div>
-                            <label class="mt-3" for="date_de_naissance">Date de naissance :</label>
-                            <div class="cta-inner bg-faded text-center rounded">
-                                <input class="form-control" name="date_de_naissance" id="date_de_naissance" placeholder="Entrez votre date de naissance..." value="{{ $etudiant->date_de_naissance }}"></input>
-                            </div>
-                            <label class="mt-3" for="ville_id">Ville :</label>
-                            <div class="cta-inner bg-faded text-center rounded">
-                                <select class="form-control" name="ville_id" id="ville_id" placeholder="Entrez votre date de naissance...">
-                                    <option value="{{ $etudiant->ville_id }}"@selected>{{ $etudiant->etudiantHasVille->nom }}</option>
-                                    @forelse ($villes as $ville)
-                                    <option value= "{{ $ville->id }}" @selected>
-                                        {{ $ville->nom }}
-                                    </option>
-                                    @empty
-                                    <li>Aucun ville</li>
-                                    @endforelse
-                                </select>
-                            </div>
-                            <!-- Submit Button-->
-                            <button class="btn btn-outline-dark mt-4 mb-5" id="submitButton" type="submit">Envoyer</button>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
 @endsection

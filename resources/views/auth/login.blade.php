@@ -8,7 +8,7 @@
                 <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                     <div class="card" style="border-radius: 15px;">
                         <div class="card-body p-5">
-                            <h2 class="text-uppercase text-center mb-5">Connexion</h2>
+                            <h2 class="text-uppercase text-center mb-5">@lang('lang.title_login_user')</h2>
 
                             <form action="{{ route('custom.login')}}" method="post">
                                 @csrf
@@ -19,7 +19,7 @@
                                 </div>
                                 @endif
                                 <div class="form-outline mb-4">
-                                    <input type="email" class="form-control" placeholder="Votre courriel" name="email" value="{{old('email')}}"/>
+                                    <input type="text" class="form-control" placeholder="@lang('lang.placeholder_registration_email')" name="email" value="{{old('email')}}"/>
                                     @if($errors->has('email'))
                                     <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
                                         {{ $errors->first('email') }}
@@ -29,13 +29,14 @@
                                 </div>
                                 
                                 <div class="form-outline mb-4">
-                                    <input type="password" class="form-control" placeholder="Entrer le mot de passe" name="password"/>
+                                    <input type="password" class="form-control" placeholder="@lang('lang.text_password')" name="password"/>
                                     @if($errors->has('password'))
                                     <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
                                         {{ $errors->first('password') }}
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
-                                    @elseif($errors->all())
+                                    @elseif(!$errors->has('email') and ($errors->all()))
+                                    
                                     <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
                                         {{ $errors->first() }}
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -43,11 +44,11 @@
                                     @endif
                                 </div>
                                 <div class="d-flex justify-content-center btn-group-vertical">
-                                    <button class="btn btn-outline-dark">Se connecter</button>
+                                    <button class="btn btn-outline-dark">@lang('lang.button_login')</button>
                                 </div>
 
-                                <p class="text-center text-muted mt-5 mb-0">Vous n'êtes pas encore enregistré ? Have already an account? <a href="{{ route('registration') }}"
-                                    class="fw-bold text-body"><u>Registration</u></a></p>
+                                <p class="text-center text-muted mt-5 mb-0">@lang('lang.text_question_login')<a href="{{ route('registration') }}"
+                                    class="fw-bold text-body"><u>@lang('lang.button_sign_up')</u></a></p>
                             </form>
 
                         </div>

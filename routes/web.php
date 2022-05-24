@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\CustomAuthController;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\EtudiantController;
+use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\VilleController;
 use \App\Http\Controllers\ArticleController;
 use \App\Http\Controllers\LocalizationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,27 +20,41 @@ use \App\Http\Controllers\LocalizationController;
 */
 
 Route::get('/', function () {
-    return view('welcome')->name('welcome');
-});
+    $user_name ='';
+    $user_id ='';
+
+    if(Auth::check()){
+        $user_name = Auth::user()->name;
+        $user_id = Auth::user()->id;
+    }
+    return view('welcome', ['user_id'=>$user_id, 'user_name'=>$user_name]);
+})->name('welcome');
 
 Route::get('/about', function () {
-    return view('about');
-});
+    $user_name ='';
+    $user_id ='';
 
-Route::get('/liste', [EtudiantController::class, 'index'])->name('liste');
-Route::get('/liste/create/etudiant', [EtudiantController::class, 'create'])->name('liste.create');
-Route::post('/liste/create/etudiant', [EtudiantController::class, 'store'])->name('liste.create');
-Route::get('/liste/{etudiant}', [EtudiantController::class, 'show'])->name('liste.show');
-Route::get('/liste/{etudiant}/edit', [EtudiantController::class, 'edit'])->name('liste.edit');
-Route::put('/liste/{etudiant}/edit', [EtudiantController::class, 'update']);
-Route::delete('/liste/{etudiant}', [EtudiantController::class, 'destroy']);
+    if(Auth::check()){
+        $user_name = Auth::user()->name;
+        $user_id = Auth::user()->id;
+    }
+    return view('about', ['user_id'=>$user_id, 'user_name'=>$user_name]);
+})->name('about');
+
+Route::get('/liste', [UserController::class, 'index'])->name('liste');
+//Route::get('/liste/create/user', [UserController::class, 'create'])->name('liste.create');
+//Route::post('/liste/create/user', [UserController::class, 'store'])->name('liste.create');
+Route::get('/liste/{user}', [UserController::class, 'show'])->name('liste.show');
+Route::get('/liste/{user}/edit', [UserController::class, 'edit'])->name('liste.edit')->middleware('auth');
+Route::put('/liste/{user}/edit', [UserController::class, 'update']);
+Route::delete('/liste/{user}', [UserController::class, 'destroy']);
 
 Route::get('login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('custom.login');
 Route::get('registration', [CustomAuthController::class, 'create'])->name('registration');
 Route::post('custom-registration', [CustomAuthController::class, 'store'])->name('custom.registration');
 Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout')->middleware('auth');
-Route::get('dashboard', [CustomAuthController::class, 'dashboard']);
+Route::get('custom-login', [CustomAuthController::class, 'dashboard']);
 
 Route::get('/forum', [ArticleController::class, 'index'])->name('forum')->middleware('auth');
 Route::get('/forum/{article}', [ArticleController::class, 'show'])->name('forum.show')->middleware('auth');

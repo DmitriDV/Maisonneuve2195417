@@ -8,13 +8,13 @@
                     <div class="col-xl-9 col-lg-10 mx-auto">
                         <div class="bg-faded rounded p-5">
                             <h2 class="section-heading mb-4">
-                                <span class="section-heading-upper">Notre communité</span>
+                                <span class="section-heading-upper">@lang('lang.title_about')</span>
                             </h2>
                             <p>                              
-                            Fondée en 1997 par les étudiants Chloe Trudeau et John Brown, notre communauté offre de la fraternité autour de sujets universitaires. Nous cherchons à agrandir notre communauté. Nous nous faisons des amis et échangeons nos expériences avec d'autres collèges et universités.
+                            @lang('lang.history_about')
                             </p>
                             <p class="mb-0">
-                            Rejoignez-nous et vous ne serez pas seul.
+                            @lang('lang.tagline_about')
                             </p>
                         </div>
                     </div>
