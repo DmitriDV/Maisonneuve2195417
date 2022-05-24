@@ -42,8 +42,6 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/liste', [UserController::class, 'index'])->name('liste');
-//Route::get('/liste/create/user', [UserController::class, 'create'])->name('liste.create');
-//Route::post('/liste/create/user', [UserController::class, 'store'])->name('liste.create');
 Route::get('/liste/{user}', [UserController::class, 'show'])->name('liste.show');
 Route::get('/liste/{user}/edit', [UserController::class, 'edit'])->name('liste.edit')->middleware('auth');
 Route::put('/liste/{user}/edit', [UserController::class, 'update']);

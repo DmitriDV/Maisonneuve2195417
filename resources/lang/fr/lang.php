@@ -58,6 +58,8 @@ return [
     //blade forum create
     'title_forum_create'         => 'Créer un article',
     'button_forum_create'        => 'Publier',
+    'english_forum_create'       => 'Anglais',
+    'french_forum_create'        => 'Français',
 
     //blade forum index
     'title_forum_index'          => 'Bienvenue sur notre forum!',

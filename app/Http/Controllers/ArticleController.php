@@ -83,13 +83,6 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    //public function show(Article $article, Etudiant $etudiants)
-    //{
-    //    $selectedArticle = Article::selectArticle($article->id);
-    //            $user_email = Auth::user()->email;
-    //    return  view ('forum.show', ['selectedArticle'=>$selectedArticle, 'article'=>$article,'etudiants'=>$etudiants, 'user_email'=>$user_email]);
-    //}
-
     public function show(Article $article, Etudiant $etudiants)
     {
 
@@ -166,5 +159,12 @@ class ArticleController extends Controller
     {
         $article->delete();
         return redirect(route('forum'));
+    }
+
+    public function showPdf(Article $article){
+        
+        $pdf = PDF::loadView('forum.pdf-file', ['article' => $article]);
+        return $pdf->download('article.pdf');
+        //return $pdf->stream('article.pdf');
     }
 }

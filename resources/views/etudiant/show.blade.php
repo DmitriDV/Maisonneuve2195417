@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-    <div class="container px-4 px-lg-5 mb-5 card h-100">
+    <div class="container px-4 px-lg-5 mt-3 mb-10 card h-100">
         <div class="row">
             <div class="col-12 pt-2 mt-3">  
                 <h2 class="display-one mb-3">@lang('lang.title_student_profile') : {{ ucfirst($user->name) }} </h2>

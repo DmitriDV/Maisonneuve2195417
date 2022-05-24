@@ -2,14 +2,14 @@
 //EN
 return [
     //blade registration
-    'title_register_user'            => 'Registration',
+    'title_register_user'           => 'Registration',
     'text_password'                 => 'Enter Password',
     'text_password_repeat'          => 'Repeat password',
     'text_question_registration'    => 'Have already an account? ',
  
     //blade login
-    'title_login_user'       => 'Connection',
-    'button_login'            => 'Login',
+    'title_login_user'      => 'Connection',
+    'button_login'          => 'Login',
     'text_question_login'   => 'You\'re not registered yet? ',
     'text_logout'           => 'Logout',
 
@@ -58,6 +58,8 @@ return [
     //blade forum create
     'title_forum_create'         => 'Create an article',
     'button_forum_create'        => 'Publish',
+    'english_forum_create'       => 'English',
+    'french_forum_create'        => 'French',
 
     //blade forum index
     'title_forum_index'            => 'Welcome to our forum!',

@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Etudiant;
 use Illuminate\Http\Request;
 use Auth;
+use Hash; 
+use DB;
 
 class UserController extends Controller
 {
@@ -37,8 +39,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //$villes = Ville::all();
-        //return view('etudiant.create', ['villes'=>$villes]);
+        //
     }
 
     /**
@@ -49,15 +50,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //$nouvelEtudiant = Etudiant::create([
-        //    'nom' => $request->nom,
-        //    'adresse' => $request->adresse,
-        //    'phone' => $request->phone,
-        //    'email' => $request->email,
-        //    'date_de_naissance' => $request->date_de_naissance,
-        //    'ville_id' => $request->ville_id
-        //]);
-        //return redirect('liste/'.$nouvelEtudiant->id);
+        //
     }
 
     /**
@@ -113,8 +106,6 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user, Etudiant $etudiant)
     {
-        //return $user;
-        
         $user_name ='';
         $user_id ='';
         
@@ -130,8 +121,7 @@ class UserController extends Controller
             'name' => 'required|min:2|max:191',
             'password' => 'required|confirmed|min:6|max:20'
         ]);
-            //return $etudiant;
-            
+    
         Etudiant::where('id', $user->id)->update([
             'date_de_naissance' => $request->date_de_naissance,
             'ville_id' => $request->ville_id,
@@ -143,7 +133,9 @@ class UserController extends Controller
             'name' => $request->name,
             'password' => $request->password
         ]);
-        return redirect(route('liste.edit', ['user'=>$user, 'user_id'=>$user_id, 'user_name'=>$user_name,]));
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect(route('liste.show', ['user'=>$user, 'user_id'=>$user_id, 'user_name'=>$user_name,]));
     }
 
     /**
@@ -154,20 +146,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        
-        $oUser = User::all();
-        $oEtudiant = Etudiant::all();
-        //return $user;
-       // $this->$oUser::delete()
-       // ->where('id', '=', $user->id);
-       // $this->$oEtudiant::delete()
-       // ->where('id', '=', $user->etudiant_id);
-       // ->join('users', 'users.etudiant_id', '=', 'etudiants.id')
-
-        $query = User::select()
-        ->where('id', '=', $user->id);
-        //$query = Etudiant::delete($this->user->etudiant_id) ;
-        return $query;
+        DB::table("articles")->where("user_id", $user->id)->delete();
+        DB::table("users")->where("id", $user->id)->delete();
+        DB::table("etudiants")->where("id", $user->etudiant_id)->delete();
 
         return redirect(route('liste'));
     }

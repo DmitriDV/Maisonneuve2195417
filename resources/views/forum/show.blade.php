@@ -39,10 +39,9 @@
                                     @else{!! $article->contenu_en !!}@endif</p>
                                 </div>
                                 <div class="card-footer d-flex flex-wrap justify-content-end align-items-center ">
-                                <div class="px-4 pt-3">    
-                                <div class="text-muted small">@lang('lang.text_forum_date'){{ ucfirst($article->created_at->format('Y-m-d'))}}</div>
-                                </div>
-                                    
+                                    <div class="px-4 pt-3">    
+                                        <div class="text-muted small">@lang('lang.text_forum_date'){{ ucfirst($article->created_at->format('Y-m-d'))}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
