@@ -11,12 +11,6 @@
                             <h2 class="text-uppercase text-center mb-5">@lang('lang.title_student_modification')</h2>
                             <form action="" method="post">
                                 @csrf
-                                @if($errors->all())
-                                    <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
-                                        {{ $errors->first() }}
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                @endif
                                 @method('PUT')
                                 <div class="form-outline mb-1">
                                     <label class="mt-3" for="name">@lang('lang.title_registration_name') :</label>
